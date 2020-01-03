@@ -1,0 +1,77 @@
+root@ubuntu-s-2vcpu-2gb-blr1-01:~# docker-compose up -d
+Creating network "root_jenkins" with the default driver
+Pulling postgres (postgres:9.6)...
+9.6: Pulling from library/postgres
+804555ee0376: Pull complete
+dc6ae8802d84: Pull complete
+395ccdd34b05: Pull complete
+a97aec38ba66: Pull complete
+38ca37422b05: Pull complete
+4f48902af5dd: Pull complete
+f3aa2278d16c: Pull complete
+babec8f73680: Pull complete
+a30222aaecde: Pull complete
+972ad5fa55d4: Pull complete
+214d0c1bb123: Pull complete
+3eceb882382d: Pull complete
+4c388f051f32: Pull complete
+fbaa18159c16: Pull complete
+Digest: sha256:b5f6e8a1369ec3ce48c8419c65dffa083c3eb4a507cb8c75b50bdf3480588a07
+Status: Downloaded newer image for postgres:9.6
+Pulling sonarqube (sonarqube:lts)...
+lts: Pulling from library/sonarqube
+000eee12ec04: Pull complete
+2f1dc2bdcfe1: Pull complete
+eec880363624: Pull complete
+8992c959a11d: Pull complete
+25ff10872c55: Pull complete
+f2b73f885df1: Pull complete
+d2b58376c257: Pull complete
+6a553db130f6: Pull complete
+65af0d99b5db: Pull complete
+Digest: sha256:929e4ab60b70537e0d40d03143f5f56d6af31c4be3896893095190dafc5a369a
+Status: Downloaded newer image for sonarqube:lts
+Creating root_postgres_1 ...
+Creating root_jenkins_1  ...
+Creating root_postgres_1 ... done
+ERROR: for root_jenkins_1  a bytes-like object is required, not 'str'
+Creating root_sonarqube_1 ... done
+
+ERROR: for jenkins  a bytes-like object is required, not 'str'
+Traceback (most recent call last):
+  File "site-packages/docker/api/client.py", line 261, in _raise_for_status
+  File "site-packages/requests/models.py", line 940, in raise_for_status
+requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: http+docker://localhost/v1.22/containers/0130f7aaf4318b75f693894e8988d628f422ff61313a0a615577f1c08e57a707/start
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "compose/service.py", line 625, in start_container
+  File "compose/container.py", line 241, in start
+  File "site-packages/docker/utils/decorators.py", line 19, in wrapped
+  File "site-packages/docker/api/container.py", line 1095, in start
+  File "site-packages/docker/api/client.py", line 263, in _raise_for_status
+  File "site-packages/docker/errors.py", line 31, in create_api_error_from_http_exception
+docker.errors.APIError: 500 Server Error: Internal Server Error ("b'driver failed programming external connectivity on endpoint root_jenkins_1 (b5b4269d490c26a4d112126aa1192e984b43081fc3378bcc598b85dbcb4d7f6b): Bind for 0.0.0.0:8080 failed: port is already allocated'")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "bin/docker-compose", line 6, in <module>
+  File "compose/cli/main.py", line 72, in main
+  File "compose/cli/main.py", line 128, in perform_command
+  File "compose/cli/main.py", line 1107, in up
+  File "compose/cli/main.py", line 1103, in up
+  File "compose/project.py", line 570, in up
+  File "compose/parallel.py", line 112, in parallel_execute
+  File "compose/parallel.py", line 210, in producer
+  File "compose/project.py", line 556, in do
+  File "compose/service.py", line 546, in execute_convergence_plan
+  File "compose/service.py", line 467, in _execute_convergence_create
+  File "compose/parallel.py", line 112, in parallel_execute
+  File "compose/parallel.py", line 210, in producer
+  File "compose/service.py", line 465, in <lambda>
+  File "compose/service.py", line 457, in create_and_start
+  File "compose/service.py", line 627, in start_container
+TypeError: a bytes-like object is required, not 'str'
+[9919] Failed to execute script docker-compose
